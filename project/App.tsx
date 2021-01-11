@@ -1,21 +1,38 @@
-import { StatusBar } from 'expo-status-bar';
 import React from 'react';
-import { StyleSheet, Text, View } from 'react-native';
+import { StatusBar, SafeAreaView } from 'react-native';
+import RNMonthly from './lib/RNMonthly';
+import moment from 'moment';
 
-export default function App() {
+const App = () => {
   return (
-    <View style={styles.container}>
-      <Text>Open up App.tsx to start working on your app!</Text>
-      <StatusBar style="auto" />
-    </View>
+    <>
+      <StatusBar barStyle="dark-content" />
+      <SafeAreaView style={{ flex: 1, width: "100%", alignItems: "center" }}>
+        <RNMonthly
+          numberOfDays={31}
+          activeDays={[1, 5, 6, 11, 21, 31]}
+          today={parseInt(moment().format("D"))}
+          todayTextStyle={{ color: "#146C6D" }}
+          itemContainerStyle={{ borderColor: "#146C6D" }}
+        />
+        <RNMonthly
+          numberOfDays={30}
+          activeBackgroundColor="green"
+          inactiveBackgroundColor="#E6FFDE"
+          activeDays={[1, 5, 6, 11, 21, 31]}
+        />
+        <RNMonthly
+          numberOfDays={28}
+          activeBackgroundColor="#9C1818"
+          inactiveBackgroundColor="#FFDEDE"
+          activeDays={[1, 2, 3, 4, 5, 11, 21, 31]}
+          today={parseInt(moment().format("D"))}
+          todayTextStyle={{ color: "#9c1817" }}
+          itemContainerStyle={{ borderColor: "#9c1817" }}
+        />
+      </SafeAreaView>
+    </>
   );
 }
 
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    backgroundColor: '#fff',
-    alignItems: 'center',
-    justifyContent: 'center',
-  },
-});
+export default App;
